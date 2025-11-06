@@ -1,0 +1,469 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.register-card {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-weight: 500;
+  color: #555;
+  font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus {
+  border-color: #667eea;
+}
+
+input[type="date"] {
+  color: #555;
+  cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.4);
+  transition: filter 0.3s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  filter: invert(0.2);
+}
+
+.image-input-container {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.webcam-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.webcam-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.webcam-button:active {
+  transform: translateY(0);
+  background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+}
+
+input[type="file"] {
+  padding: 10px;
+  border: 2px dashed #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #f9f9f9;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+  border-color: #667eea;
+  background: #f0f0ff;
+}
+
+input.error {
+  border-color: #e74c3c;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: -4px;
+}
+
+.image-preview {
+  margin-top: 10px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.image-preview h3 {
+  margin: 0 0 15px 0;
+  color: #555;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
+}
+
+.submit-button {
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 10px;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 16px 24px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  font-size: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(400px);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+  max-width: 300px;
+}
+
+.toast.show {
+  transform: translateX(0);
+}
+
+.toast.success {
+  background: linear-gradient(135deg, #43a047 0%, #66bb6a 100%);
+}
+
+.toast.error {
+  background: linear-gradient(135deg, #e53935 0%, #ef5350 100%);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 500px) {
+  .register-card {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"] {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .submit-button {
+    padding: 12px 20px;
+  }
+
+  .toast {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+    transform: translateY(-200px);
+  }
+
+  .toast.show {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 360px) {
+  .register-container {
+    padding: 10px;
+  }
+
+  .register-card {
+    padding: 15px;
+  }
+}
+
+/* Webcam Modal */
+.webcam-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.webcam-modal-content {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 640px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.webcam-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.webcam-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.close-button:active {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.webcam-body {
+  padding: 0;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  max-height: 70vh;
+  overflow: hidden;
+}
+
+.webcam-body video {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: scaleX(-1); /* Mirror effect */
+  object-fit: cover;
+}
+
+.webcam-footer {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  background: white;
+}
+
+.capture-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.capture-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.capture-button:active {
+  transform: translateY(0);
+  background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+}
+
+.capture-button svg {
+  fill: white;
+}
+
+@media (max-width: 500px) {
+  .webcam-modal {
+    align-items: flex-end;
+  }
+
+  .webcam-modal-content {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px 12px 0 0;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .webcam-header {
+    padding: 15px;
+  }
+
+  .webcam-header h2 {
+    font-size: 18px;
+  }
+
+  .webcam-body {
+    flex: 1;
+    max-height: none;
+    min-height: 400px;
+  }
+
+  .webcam-body video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .webcam-footer {
+    padding: 15px;
+  }
+
+  .capture-button {
+    padding: 16px 32px;
+    font-size: 16px;
+    width: 100%;
+  }
+
+  .close-button {
+    padding: 8px;
+  }
+}
+
+@media (max-height: 600px) {
+  .webcam-body {
+    min-height: 250px;
+    max-height: 50vh;
+  }
+}

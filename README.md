@@ -1,6 +1,31 @@
-# FrPocClient
+# Facial Recognition POC Client
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
+A Visitor Management System (VMS) client application built with Angular that uses facial recognition for visitor registration and verification.
+
+## Features
+
+- **Visitor Registration**: Register new visitors with photo capture (webcam or file upload)
+- **Visitor Verification**: Verify visitors using facial recognition
+- **Visitor Search**: Search and view visitors by scheduled date
+- **Mobile Support**: Responsive design with mobile camera support
+
+## Prerequisites
+
+- Node.js (v18 or higher)
+- Angular CLI (v20.3.8)
+- Backend API running on `http://localhost:3000` (configurable via environment variables)
+
+## Installation
+
+```bash
+npm install
+```
+
+## Configuration
+
+The API URL can be configured in the environment files:
+- Development: `src/environments/environment.ts`
+- Production: `src/environments/environment.prod.ts`
 
 ## Development server
 

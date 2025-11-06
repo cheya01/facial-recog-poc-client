@@ -1,0 +1,112 @@
+<div class="visitor-detail-container">
+  <div class="visitor-detail-card">
+    <h1>Visitor Verification</h1>
+    <p class="subtitle">Capture visitor's photo for verification</p>
+
+    <!-- Capture Photo Section -->
+    <div class="capture-section" *ngIf="!imagePreview">
+      <div class="instruction-box">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+          <circle cx="12" cy="13" r="4"></circle>
+        </svg>
+        <h3>Ready to Verify</h3>
+        <p>Capture a photo or upload from your device</p>
+      </div>
+
+      <div class="button-group">
+        <button class="capture-button" (click)="startWebcam()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+            <circle cx="12" cy="13" r="4"></circle>
+          </svg>
+          Capture Photo
+        </button>
+
+        <div class="divider">
+          <span>or</span>
+        </div>
+
+        <button class="upload-button" (click)="triggerFileInput()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          Upload Image
+        </button>
+
+        <input 
+          type="file" 
+          #fileInput 
+          accept="image/*" 
+          (change)="onFileSelected($event)" 
+          style="display: none"
+        />
+      </div>
+    </div>
+
+    <!-- Image Preview Section -->
+    <div class="preview-section" *ngIf="imagePreview">
+      <h3>Photo Preview</h3>
+      <div class="image-preview-container">
+        <img [src]="imagePreview" alt="Captured visitor photo" />
+      </div>
+
+      <div class="action-buttons">
+        <button class="retake-button" (click)="imagePreview = null; capturedFile = null">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+          </svg>
+          Retake Photo
+        </button>
+
+        <button class="verify-button" (click)="verifyVisitor()" [disabled]="isVerifying">
+          <span *ngIf="!isVerifying" class="button-content">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Verify Visitor
+          </span>
+          <span *ngIf="isVerifying" class="loading-content">
+            <span class="spinner"></span>
+            Verifying...
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Webcam Modal -->
+  <div class="webcam-modal" *ngIf="showWebcam">
+    <div class="webcam-modal-content">
+      <div class="webcam-header">
+        <h2>Capture Photo</h2>
+        <button type="button" class="close-button" (click)="closeWebcam()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="webcam-body">
+        <video #videoElement autoplay playsinline></video>
+        <canvas #canvasElement style="display: none;"></canvas>
+      </div>
+      <div class="webcam-footer">
+        <button type="button" class="capture-photo-button" (click)="capturePhoto()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+          </svg>
+          Capture Photo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" [class.show]="showToast" [class.success]="toastType === 'success'" [class.error]="toastType === 'error'">
+    {{ toastMessage }}
+  </div>
+</div>
