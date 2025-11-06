@@ -42,9 +42,8 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
-# Environment files
+# Environment files (local only)
 /src/environments/environment.ts
-/src/environments/environment.prod.ts
 .env
 .env.local
 .env.*.local
