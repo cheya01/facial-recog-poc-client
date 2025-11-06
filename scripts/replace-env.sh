@@ -11,7 +11,7 @@ echo "API_URL: $API_URL"
 
 # Find and replace in all JavaScript files in dist
 if [ -d "dist" ]; then
-  find dist -type f \( -name "*.js" -o -name "*.mjs" \) -exec sed -i.bak "s|\${NG_APP_API_URL}|$API_URL|g" {} \;
+  find dist -type f \( -name "*.js" -o -name "*.mjs" \) -exec sed -i.bak "s|NG_APP_API_URL_PLACEHOLDER|$API_URL|g" {} \;
   find dist -name "*.bak" -type f -delete
   echo "Environment variables replaced successfully!"
 else
