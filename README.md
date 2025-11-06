@@ -21,11 +21,64 @@ A Visitor Management System (VMS) client application built with Angular that use
 npm install
 ```
 
+## Environment Setup
+
+### Local Development
+
+1. Copy the environment template files:
+   ```bash
+   cp src/environments/environment.template.ts src/environments/environment.ts
+   cp src/environments/environment.template.ts src/environments/environment.prod.ts
+   ```
+
+2. Update `src/environments/environment.ts` with your local backend URL:
+   ```typescript
+   export const environment = {
+     production: false,
+     apiUrl: 'http://localhost:3000'
+   };
+   ```
+
+3. Update `src/environments/environment.prod.ts` with your production settings:
+   ```typescript
+   export const environment = {
+     production: true,
+     apiUrl: '${NG_APP_API_URL}' // Will be replaced during build
+   };
+   ```
+
+### Vercel Deployment
+
+1. **Import your repository to Vercel**
+   - Go to [Vercel Dashboard](https://vercel.com/dashboard)
+   - Click "Add New Project"
+   - Import your GitHub repository
+
+2. **Configure Environment Variables**
+   - In Vercel project settings, go to "Environment Variables"
+   - Add the following variable:
+     - **Name**: `NG_APP_API_URL`
+     - **Value**: Your production backend API URL (e.g., `https://your-api.com`)
+     - **Environment**: Production (and Preview if needed)
+
+3. **Deploy**
+   - Vercel will automatically build and deploy using `npm run build:vercel`
+   - The build script will replace `${NG_APP_API_URL}` with your actual API URL
+
+### Environment Variables Reference
+
+Create a `.env` file for local development (optional):
+```bash
+cp .env.example .env
+```
+
+Edit `.env` with your local settings.
+
 ## Configuration
 
-The API URL can be configured in the environment files:
-- Development: `src/environments/environment.ts`
-- Production: `src/environments/environment.prod.ts`
+The API URL is configured via environment variables:
+- **Development**: Set in `src/environments/environment.ts`
+- **Production**: Set via `NG_APP_API_URL` environment variable in Vercel
 
 ## Development server
 

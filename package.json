@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:vercel": "ng build && ./scripts/replace-env.sh",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:fr-poc-client": "node dist/fr-poc-client/server/server.mjs"
