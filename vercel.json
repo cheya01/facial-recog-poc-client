@@ -2,8 +2,5 @@
   "buildCommand": "npm run build:vercel",
   "outputDirectory": "dist/fr-poc-client/browser",
   "framework": "angular",
-  "installCommand": "npm install",
-  "env": {
-    "NG_APP_API_URL": "@ng_app_api_url"
-  }
+  "installCommand": "npm install"
 }
