@@ -423,6 +423,285 @@ h1 {
   background: linear-gradient(135deg, #e53935 0%, #ef5350 100%);
 }
 
+/* Verification Result Modal */
+.result-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+  padding: 20px;
+}
+
+.result-modal-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.result-header {
+  background: linear-gradient(135deg, #43a047 0%, #66bb6a 100%);
+  padding: 30px;
+  text-align: center;
+  color: white;
+}
+
+.success-title {
+  margin: 0 0 15px 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+}
+
+.confidence {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+}
+
+.welcome-message {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+}
+
+.result-body {
+  padding: 40px 30px;
+}
+
+.image-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.comparison-image {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.image-label {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.comparison-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
+  max-height: 350px;
+}
+
+.result-footer {
+  padding: 20px 30px 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-width: 200px;
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.back-button:active {
+  transform: translateY(0);
+  background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+}
+
+/* Manual Verification Modal */
+.manual-verify-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+  padding: 20px;
+}
+
+.manual-verify-modal-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  animation: slideUp 0.4s ease;
+}
+
+.manual-verify-header {
+  background: linear-gradient(135deg, #f44336 0%, #e91e63 100%);
+  padding: 30px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.warning-icon {
+  stroke: white;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.warning-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+}
+
+.warning-subtitle {
+  margin: 0;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+}
+
+.confidence-warning {
+  margin: 0;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+.manual-verify-body {
+  padding: 40px 30px;
+}
+
+.manual-verify-footer {
+  padding: 20px 30px 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.reject-button,
+.verify-manual-button {
+  flex: 1;
+  max-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.reject-button {
+  background: linear-gradient(135deg, #e53935 0%, #ef5350 100%);
+  color: white;
+}
+
+.verify-manual-button {
+  background: linear-gradient(135deg, #43a047 0%, #66bb6a 100%);
+  color: white;
+}
+
+.reject-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
+}
+
+.verify-manual-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(67, 160, 71, 0.4);
+}
+
+.reject-button:active:not(:disabled) {
+  transform: translateY(0);
+  background: linear-gradient(135deg, #c62828 0%, #e53935 100%);
+}
+
+.verify-manual-button:active:not(:disabled) {
+  transform: translateY(0);
+  background: linear-gradient(135deg, #388e3c 0%, #4caf50 100%);
+}
+
+.reject-button:disabled,
+.verify-manual-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 /* Mobile Responsiveness */
 @media (max-width: 600px) {
   .visitor-detail-container {
@@ -485,6 +764,101 @@ h1 {
     transform: translateY(0);
   }
 
+                /* Result Modal Mobile */
+                .result-modal {
+                  padding: 10px;
+                }
+        
+                .result-modal-content {
+                  max-height: 95vh;
+                  overflow-y: auto;
+                }
+        
+                .result-header {
+                  padding: 25px 20px;
+                }
+        
+                .success-title {
+                  font-size: 22px;
+                  margin-bottom: 12px;
+                }
+        
+                .confidence {
+                  font-size: 15px;
+                  margin-bottom: 15px;
+                }
+        
+                .welcome-message {
+                  font-size: 20px;
+                }
+        
+                .result-body {
+                  padding: 25px 20px;
+                }
+        
+                .image-comparison {
+                  grid-template-columns: 1fr;
+                  gap: 25px;
+                }
+        
+                .comparison-image img {
+                  max-height: 300px;
+                }
+        
+                .result-footer {
+                  padding: 15px 20px 25px;
+                }
+        
+                .back-button {
+                  width: 100%;
+                  min-width: auto;
+                }
+        
+                /* Manual Verify Modal Mobile */
+                .manual-verify-modal {
+                  padding: 10px;
+                }
+        
+                .manual-verify-modal-content {
+                  max-height: 95vh;
+                  overflow-y: auto;
+                }
+        
+                .manual-verify-header {
+                  padding: 25px 20px;
+                }
+        
+                .warning-icon {
+                  width: 40px;
+                  height: 40px;
+                }
+        
+                .warning-title {
+                  font-size: 22px;
+                }
+        
+                .warning-subtitle {
+                  font-size: 16px;
+                }
+        
+                .confidence-warning {
+                  font-size: 14px;
+                }
+        
+                .manual-verify-body {
+                  padding: 25px 20px;
+                }
+        
+                .manual-verify-footer {
+                  padding: 15px 20px 25px;
+                  flex-direction: column;
+                }
+        
+                .reject-button,
+                .verify-manual-button {
+                  width: 100%;
+                  max-width: none;
+                }
   .webcam-modal {
     align-items: flex-end;
   }
@@ -496,8 +870,6 @@ h1 {
     max-height: 95vh;
     display: flex;
     flex-direction: column;
-  }
-
   .webcam-header {
     padding: 15px;
   }

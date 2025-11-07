@@ -156,6 +156,9 @@ export class RegisterPage {
       
       const context = canvas.getContext('2d');
       if (context) {
+        // Flip the canvas horizontally to un-mirror the image
+        context.translate(canvas.width, 0);
+        context.scale(-1, 1);
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
         
         // Convert canvas to blob and create file

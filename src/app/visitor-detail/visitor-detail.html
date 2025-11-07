@@ -109,4 +109,101 @@
   <div class="toast" [class.show]="showToast" [class.success]="toastType === 'success'" [class.error]="toastType === 'error'">
     {{ toastMessage }}
   </div>
+<!-- Verification Result Modal -->
+<div class="result-modal" *ngIf="showResultModal && verificationResult">
+  <div class="result-modal-content">
+    <div class="result-header">
+      <h2 class="success-title">Face Verification Successful</h2>
+      <p class="confidence">Confidence: {{ verificationResult.confidence.toFixed(2) }}%</p>
+      <h3 class="welcome-message">Welcome {{ verificationResult.visitorName }}!</h3>
+    </div>
+
+    <div class="result-body">
+      <div class="image-comparison">
+        <div class="comparison-image">
+          <p class="image-label">Pre-visit Image</p>
+          <img [src]="verificationResult.previsitImage" alt="Pre-visit photo" />
+        </div>
+        <div class="comparison-image">
+          <p class="image-label">Visit Image</p>
+          <img [src]="verificationResult.facecaptureImage" alt="Visit photo" />
+        </div>
+      </div>
+    </div>
+
+    <div class="result-footer">
+      <button type="button" class="back-button" (click)="closeResultModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Back to Verify
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Manual Verification Modal -->
+<div class="manual-verify-modal" *ngIf="showManualVerifyModal && verificationResult">
+  <div class="manual-verify-modal-content">
+    <div class="manual-verify-header">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="warning-icon">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <h2 class="warning-title">Failed to Verify User</h2>
+      <p class="warning-subtitle">Please verify manually</p>
+      <p class="confidence-warning">Confidence: {{ verificationResult.confidence.toFixed(2) }}%</p>
+    </div>
+
+    <div class="manual-verify-body">
+      <div class="image-comparison">
+        <div class="comparison-image">
+          <p class="image-label">Pre-visit Image</p>
+          <img [src]="verificationResult.previsitImage" alt="Pre-visit photo" />
+        </div>
+        <div class="comparison-image">
+          <p class="image-label">Visit Image</p>
+          <img [src]="verificationResult.facecaptureImage" alt="Visit photo" />
+        </div>
+      </div>
+    </div>
+
+    <div class="manual-verify-footer">
+      <button type="button" class="reject-button" (click)="manualVerify('failed')" [disabled]="isManualVerifying">
+        <span *ngIf="!isManualVerifying">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>
+          Reject
+        </span>
+        <span *ngIf="isManualVerifying" class="loading-content">
+          <span class="spinner"></span>
+          Processing...
+        </span>
+      </button>
+
+      <button type="button" class="verify-manual-button" (click)="manualVerify('verified')"
+        [disabled]="isManualVerifying">
+        <span *ngIf="!isManualVerifying">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Verify
+        </span>
+        <span *ngIf="isManualVerifying" class="loading-content">
+          <span class="spinner"></span>
+          Processing...
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
 </div>

@@ -24,6 +24,21 @@ export class VisitorDetail implements OnDestroy {
   showToast = false;
   toastMessage = '';
   toastType: 'success' | 'error' = 'success';
+  
+  // Verification result modal
+  showResultModal = false;
+  verificationResult: {
+    match: boolean;
+    confidence: number;
+    visitorName: string;
+    previsitImage: string;
+    facecaptureImage: string;
+    verifiedImageUrl?: string;
+  } | null = null;
+  
+  // Manual verification
+  showManualVerifyModal = false;
+  isManualVerifying = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,7 +59,7 @@ export class VisitorDetail implements OnDestroy {
       const constraints: MediaStreamConstraints = {
         video: isMobile 
           ? { 
-              facingMode: 'user', // Front camera on mobile
+              facingMode: 'environment', // Rear camera on mobile for verification
               width: { ideal: 1280 },
               height: { ideal: 720 }
             }
@@ -83,6 +98,9 @@ export class VisitorDetail implements OnDestroy {
       
       const context = canvas.getContext('2d');
       if (context) {
+        // Flip the canvas horizontally to un-mirror the image
+        context.translate(canvas.width, 0);
+        context.scale(-1, 1);
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
         
         // Convert canvas to blob and create file
@@ -153,17 +171,31 @@ export class VisitorDetail implements OnDestroy {
     formData.append('id', this.visitorId);
     formData.append('image', this.capturedFile);
 
-    this.http.post(`${environment.apiUrl}/api/visitors/verify`, formData)
+    this.http.post<any>(`${environment.apiUrl}/api/visitors/verify`, formData)
       .subscribe({
         next: (response) => {
-          console.log('Verification successful:', response);
+          console.log('Verification response:', response);
           this.isVerifying = false;
-          this.showToastMessage('Visitor verified successfully!', 'success');
           
-          // Navigate back to verify page after 2 seconds
-          setTimeout(() => {
-            this.router.navigate(['/verify']);
-          }, 2000);
+          // Store verification result for both success and failure
+          this.verificationResult = {
+            match: response.match,
+            confidence: response.confidence,
+            visitorName: response.visitorName,
+            previsitImage: `data:image/jpeg;base64,${response.previsitImage}`,
+            facecaptureImage: `data:image/jpeg;base64,${response.facecaptureImage}`,
+            verifiedImageUrl: response.verifiedImageUrl
+          };
+          
+          if (response.match) {
+            // Show success modal
+            this.showResultModal = true;
+            this.showToastMessage('Face verification successful!', 'success');
+          } else {
+            // Show manual verification modal
+            this.showManualVerifyModal = true;
+            this.showToastMessage('Automatic verification failed. Manual verification required.', 'error');
+          }
         },
         error: (error) => {
           console.error('Verification failed:', error);
@@ -171,6 +203,55 @@ export class VisitorDetail implements OnDestroy {
           this.showToastMessage('Verification failed. Please try again.', 'error');
         }
       });
+  }
+
+  closeResultModal(): void {
+    this.showResultModal = false;
+    this.router.navigate(['/verify']);
+  }
+
+  manualVerify(remarks: 'verified' | 'failed'): void {
+    if (!this.verificationResult) return;
+
+    this.isManualVerifying = true;
+
+    const payload = {
+      id: this.visitorId,
+      match: this.verificationResult.match,
+      confidence: this.verificationResult.confidence,
+      verifiedImageUrl: this.verificationResult.verifiedImageUrl || '',
+      remarks: remarks
+    };
+    // console.log('Manual verification payload:', payload);
+
+    this.http.post<any>(`${environment.apiUrl}/api/visitors/manualVerify`, payload)
+      .subscribe({
+        next: (response) => {
+          console.log('Manual verification response:', response);
+          this.isManualVerifying = false;
+          this.showManualVerifyModal = false;
+          
+          const message = remarks === 'verified' 
+            ? `Visitor ${response.visitorName} verified successfully!`
+            : `Visitor ${response.visitorName} rejected.`;
+          
+          this.showToastMessage(message, remarks === 'verified' ? 'success' : 'error');
+          
+          // Navigate back after 2 seconds
+          setTimeout(() => {
+            this.router.navigate(['/verify']);
+          }, 2000);
+        },
+        error: (error) => {
+          console.error('Manual verification failed:', error);
+          this.isManualVerifying = false;
+          this.showToastMessage('Manual verification failed. Please try again.', 'error');
+        }
+      });
+  }
+
+  closeManualVerifyModal(): void {
+    this.showManualVerifyModal = false;
   }
 
   showToastMessage(message: string, type: 'success' | 'error'): void {
