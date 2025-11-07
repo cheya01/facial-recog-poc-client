@@ -870,6 +870,8 @@ h1 {
     max-height: 95vh;
     display: flex;
     flex-direction: column;
+  }
+
   .webcam-header {
     padding: 15px;
   }
