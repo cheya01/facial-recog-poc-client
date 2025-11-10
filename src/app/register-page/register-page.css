@@ -64,14 +64,18 @@ input[type="date"]:focus {
 /* Date Input Wrapper */
 .date-input-wrapper {
   position: relative;
+  /* border: dashed 2px #0a0909; */
 }
 
 .date-input-wrapper input[type="date"] {
   color: transparent;
   cursor: pointer;
   position: relative;
-    z-index: 2;
+  z-index: 2;
     background: transparent;
+  border: solid 2px #000;
+    width: 80%;
+    min-width: 280px;
 }
 
 .date-input-wrapper input[type="date"].has-value {
@@ -81,7 +85,7 @@ input[type="date"]:focus {
 .date-input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   position: absolute;
-    right: 16px;
+  right: 16px;
     z-index: 3;
   filter: invert(0.4);
   transition: filter 0.3s ease;

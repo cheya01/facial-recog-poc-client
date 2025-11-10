@@ -55,7 +55,7 @@
           />
           <span class="date-placeholder" *ngIf="!scheduledAt?.value">Tap to select visit date</span>
           <span class="date-display" *ngIf="scheduledAt?.value">{{ formattedScheduledDate }}</span>
-          </div>
+        </div>
         <div class="error-message" *ngIf="scheduledAt?.invalid && scheduledAt?.touched">
           <span *ngIf="scheduledAt?.errors?.['required']">Please select a visit date</span>
         </div>
