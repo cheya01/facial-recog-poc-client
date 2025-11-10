@@ -61,21 +61,55 @@ input[type="date"]:focus {
   border-color: #667eea;
 }
 
-input[type="date"] {
-  color: #555;
-  cursor: pointer;
+/* Date Input Wrapper */
+.date-input-wrapper {
+  position: relative;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+.date-input-wrapper input[type="date"] {
+  color: transparent;
   cursor: pointer;
+  position: relative;
+    z-index: 2;
+    background: transparent;
+}
+
+.date-input-wrapper input[type="date"].has-value {
+  color: transparent;
+}
+
+.date-input-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  position: absolute;
+    right: 16px;
+    z-index: 3;
   filter: invert(0.4);
   transition: filter 0.3s ease;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator:hover {
+.date-input-wrapper input[type="date"]::-webkit-calendar-picker-indicator:hover {
   filter: invert(0.2);
 }
 
+.date-placeholder,
+.date-display {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 16px;
+  z-index: 1;
+}
+
+.date-placeholder {
+  color: #999;
+}
+
+.date-display {
+  color: #555;
+  font-weight: 500;
+}
 .image-input-container {
   display: flex;
   gap: 10px;

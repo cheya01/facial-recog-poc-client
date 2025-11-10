@@ -209,4 +209,17 @@ export class RegisterPage {
   get image() {
     return this.registrationForm.get('image');
   }
+
+  get formattedScheduledDate(): string {
+    const dateValue = this.scheduledAt?.value;
+    if (!dateValue) return '';
+    
+    const date = new Date(dateValue + 'T00:00:00'); // Add time to avoid timezone issues
+    const options: Intl.DateTimeFormatOptions = { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    };
+    return date.toLocaleDateString('en-US', options);
+  }
 }

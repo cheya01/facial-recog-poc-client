@@ -12,6 +12,7 @@ interface Visitor {
   phone: string;
   scheduledAt: string;
   image?: string;
+  imageUrl?: string;
 }
 
 @Component({
