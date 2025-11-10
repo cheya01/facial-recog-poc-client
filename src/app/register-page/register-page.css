@@ -73,7 +73,6 @@ input[type="date"]:focus {
   position: relative;
   z-index: 2;
     background: transparent;
-  border: solid 2px #000;
     width: 80%;
     min-width: 280px;
 }
