@@ -55,6 +55,7 @@ h1 {
   font-weight: 500;
   color: #555;
   font-size: 14px;
+  text-align: center;
 }
 
 input[type="date"] {
@@ -66,6 +67,10 @@ input[type="date"] {
   outline: none;
   color: #555;
   cursor: pointer;
+  text-align: center;
+    min-width: 250px;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 input[type="date"]:focus {
